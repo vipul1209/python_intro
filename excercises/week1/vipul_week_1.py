@@ -9,19 +9,38 @@ Python interpreters are available for many operating systems. CPython, the refer
 is open source software[30] and has a community-based development model, as do nearly all of Python's other implementations. 
 Python and CPython are managed by the non-profit Python Software Foundation.
 """
-list1 = paragraph.split()
-print(list1)
 
-list2 = []
+
+list1 = paragraph.split() #Splitting words of paragraph in list 
+
+print("\n Modifications without punctuation             \n")
+
+clean_para =''
+
 new_paragraph = ""
 i = 0
 for e in list1:
     if e[-1]=='s':
         e = e[:-1]
         i = i + 1
-    list2.append(e)
+        
     new_paragraph = new_paragraph +' '+ e
-print(list2,'\n')
+
 print(new_paragraph,'\n')
 print('### There were a total of '+str(i)+' words altered ###')
 
+print("\nModifications considering punctuation          \n")
+
+puntuation = '''`~!@#$%^&*()_+-={[\|;'/.,:"?><"']}1234567890''' # Punctuations and Numbers
+final_list =[]
+for i in list1:
+    a = list(i)
+    if 's' in i:
+        if len(i) -1 == i.rindex('s'): # Cases where 's' is not followed by a punctuation or number
+            i = i[:i.rindex('s')] 
+        elif i[i.rindex('s') + 1]  in list(puntuation): # Cases where 's' is followed by a punctuation or a number
+            i= i[: i.rindex('s') ] + i[i.rindex('s')+1:] 
+        
+    final_list.append(i)
+clean_para =' '.join(final_list)
+print(clean_para)
